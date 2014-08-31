@@ -152,7 +152,7 @@ bool luaA_struct_registered_typeid(lua_State* L, luaA_Type type);
 int luaA_struct_push_typeid(lua_State* L, luaA_Type type,const void* c_in);
 void luaA_struct_to_typeid(lua_State* L, luaA_Type type, void* c_out, int index);
 
-
+#if 0
 /*
  ** enum function
  */
@@ -179,7 +179,7 @@ void luaA_enum_typeid(lua_State* L, luaA_Type type, size_t size);
 void luaA_enum_value_typeid_name(lua_State *L, luaA_Type type, const void* value, const char* value_name, bool case_sensitive);
 
 bool luaA_enum_registered_typeid(lua_State *L, luaA_Type type);
-
+#endif
 
 /*
 ** function calling and registration
@@ -204,9 +204,11 @@ typedef void (*luaA_Func)(void*, void*);
 #define luaA_function_reg_void(L, func, num_args, ...) __VA_ARGS_APPLY__(luaA_function_reg_args##num_args##_macro, L, func, void, ##__VA_ARGS__ )
 void luaA_function_reg_typeid(lua_State* L, void* src_func, luaA_Func auto_func, const char* name, luaA_Type ret_tid, int num_args, ...);
 
+#if 0
 /* declare & register */
 #define luaA_function(L, func, ret_t, num_args, ...) luaA_function_decl(func, ret_t, num_args, ##__VA_ARGS__); luaA_function_reg(L, func, ret_t, num_args, ##__VA_ARGS__)
-#define luaA_function_void(L, func, num_args, ...) luaA_function_decl_void(func, num_args, ##__VA_ARGS__); luaA_function_reg_void(L, func, num_args, ##__VA_ARGS__)
+#define luaA_function_void(L, func, num_args, ...) luaA_function_decl_void(func, num_args, ##__VA_ARGS__); luaA_function_reg(L, func, void, num_args, ##__VA_ARGS__)
+#endif
 
 
 /*

@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "lautoc.h"
+#include "kernel.h"
 
 enum {
   MAX_ARG_NUM = 10,

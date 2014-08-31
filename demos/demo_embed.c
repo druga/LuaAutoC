@@ -11,7 +11,8 @@ typedef struct {
   int num_wings;
 } birdie;
 
-static birdie test_birdie;
+static 
+birdie test_birdie;
 static birdie* get_instance_ptr(lua_State* L) {
   return &test_birdie;
 }
@@ -47,8 +48,8 @@ int main(int argc, char **argv) {
   
   lua_pushcfunction(L, birdie_newindex);
   lua_setglobal(L, "birdie_newindex");
-  
-  luaL_dostring(L, ""
+
+  if(luaL_dostring(L, ""
     "Birdie = {}\n"
     "setmetatable(Birdie, Birdie)\n"
     "function Birdie.__call()\n"
@@ -63,7 +64,8 @@ int main(int argc, char **argv) {
     "print(bird.name)\n"
     "print(bird.num_wings)\n"
     "\n"
-    );
+    ))
+	printf("%s\n", lua_tostring(L, -1));
   
   luaA_close();
   lua_close(L);
